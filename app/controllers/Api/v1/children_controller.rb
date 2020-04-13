@@ -4,13 +4,14 @@ class Api::V1::ChildrenController < ApplicationController
   # GET /children
   def index
     @children = Child.all
-
-    render json: @children
+    options = { include: [:user, :words]}
+    render json: ChildSerializer.new(@children, options)
   end
-
+  
   # GET /children/1
   def show
-    render json: @child
+    options = { include: [:user, :words]}
+    render json: ChildSerializer.new(@child, options)
   end
 
   # POST /children
