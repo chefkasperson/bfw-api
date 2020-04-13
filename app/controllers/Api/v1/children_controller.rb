@@ -1,4 +1,4 @@
-class ChildrenController < ApplicationController
+class Api::V1::ChildrenController < ApplicationController
   before_action :set_child, only: [:show, :update, :destroy]
 
   # GET /children

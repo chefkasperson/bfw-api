@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
-  resources :children
+  namespace :api do
+    namespace :v1 do
+      resources :words
+    end
+  end
+  
+  namespace :api do
+    namespace :v1 do
+      resources :children
+    end
+  end
+
   namespace :api do
     namespace :v1 do
       resources :users
