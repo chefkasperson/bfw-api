@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 2020_04_13_122157) do
   create_table "child_words", force: :cascade do |t|
     t.integer "child_id", null: false
     t.integer "word_id", null: false
+    t.text "notes"
+    t.string "baby_says"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["child_id"], name: "index_child_words_on_child_id"
