@@ -6,4 +6,7 @@ class ChildWord < ApplicationRecord
     word.word
   end
 
+  def age_learned(date=self.created_at)
+    self.child.age(date)
+  end
 end

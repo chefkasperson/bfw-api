@@ -12,18 +12,23 @@ class Api::V1::ChildrenController < ApplicationController
   def show
     # binding.pry
     render json: {
-      child: @child.as_json(include: [:child_words, :words]),
+      child: @child.as_json(except: [:created_at, :updated_at], include: {child_words: {include: [:age_learned, :word_string]}}),
     } 
   end
-
+  
   # POST /children
   def create
     @child = Child.new(child_params)
-
+    
     if @child.save
-      render json: @child, status: :created, location: @child
+      render json: {
+        child: @child.as_json(except: [:created_at, :updated_at], include: {child_words: {include: [:age_learned, :word_string]}}),
+      } 
     else
-      render json: @child.errors, status: :unprocessable_entity
+      render json: {
+        message: 'unable to create child',
+        status: :unprocessable_entity
+      }
     end
   end
 
@@ -49,6 +54,6 @@ class Api::V1::ChildrenController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def child_params
-      params.fetch(:child, {})
+      params.require(:child).permit(:name, :birthday, :gender, :user_id)
     end
 end

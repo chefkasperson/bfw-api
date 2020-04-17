@@ -6,7 +6,7 @@ class Api::V1::SessionsController < ApplicationController
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
       render json: {
-        current_user: current_user.as_json(except: [:password_digest], include: {children: {methods: :age, include: [{child_words: {methods: :word_string}}]}}),
+        current_user: current_user.as_json(except: [:password_digest], include: {children: {methods: :age, include: [{child_words: {methods: [:age_learned, :word_string]}}]}}),
         logged_in: true
       }
     else
@@ -30,7 +30,7 @@ class Api::V1::SessionsController < ApplicationController
   def get_current_user 
     if logged_in?
       render json: {
-        current_user: current_user.as_json(except: [:password_digest], include: {children: {methods: :age, include: [{child_words: {methods: :word_string}}]}}),
+        current_user: current_user.as_json(except: [:password_digest], include: {children: {methods: :age, include: [{child_words: {methods: [:age_learned, :word_string]}}]}}),
         logged_in: true
       } 
     else
