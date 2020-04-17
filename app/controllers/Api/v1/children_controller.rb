@@ -12,7 +12,7 @@ class Api::V1::ChildrenController < ApplicationController
   def show
     # binding.pry
     render json: {
-      child: @child.as_json(except: [:created_at, :updated_at], include: {child_words: {include: [:age_learned, :word_string]}}),
+      child: @child.as_json(except: [:created_at, :updated_at], include: {child_words: {methods: [:age_learned, :word_string]}}),
     } 
   end
   
@@ -22,7 +22,7 @@ class Api::V1::ChildrenController < ApplicationController
     
     if @child.save
       render json: {
-        child: @child.as_json(except: [:created_at, :updated_at], include: {child_words: {include: [:age_learned, :word_string]}}),
+        child: @child.as_json(except: [:created_at, :updated_at], include: {child_words: {methods: [:age_learned, :word_string]}}),
       } 
     else
       render json: {
