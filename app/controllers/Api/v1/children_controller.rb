@@ -10,8 +10,10 @@ class Api::V1::ChildrenController < ApplicationController
   
   # GET /children/1
   def show
-    options = { include: [:user, :child_words, :words]}
-    render json: ChildSerializer.new(@child, options)
+    # binding.pry
+    render json: {
+      child: @child.as_json(include: [:child_words, :words]),
+    } 
   end
 
   # POST /children

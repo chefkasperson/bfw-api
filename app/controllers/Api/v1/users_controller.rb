@@ -21,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       session[:user_id] = user.id
       render json: {
-        current_user: user.as_json(except: [:password_digest], include: [:children]),
+        current_user: user.as_json(except: [:password_digest], include: [:children.as_json(include: [:child_words, :words])]),
         logged_in: true
       }
     else
