@@ -16,7 +16,7 @@ class Api::V1::ChildrenController < ApplicationController
     } 
   end
   
-  # POST /children
+  # POST /children 
   def create
     @child = Child.new(child_params)
     
