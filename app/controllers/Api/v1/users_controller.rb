@@ -3,14 +3,10 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
-    
-    render json: UserSerializer.new(@users).serializable_hash
   end
 
   # GET /users/1
   def show
-    render json: @user
   end
 
   # POST /users
@@ -33,11 +29,6 @@ class Api::V1::UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
   end
 
   # DELETE /users/1

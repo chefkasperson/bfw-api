@@ -3,17 +3,11 @@ class Api::V1::ChildrenController < ApplicationController
 
   # GET /children
   def index
-    @children = Child.all
-    options = { include: [:user, :child_words, :words]}
-    render json: ChildSerializer.new(@children, options)
+  
   end
   
   # GET /children/1
   def show
-    # binding.pry
-    render json: {
-      child: @child.as_json(except: [:created_at, :updated_at], include: {child_words: {methods: [:age_learned, :word_string]}}),
-    } 
   end
   
   # POST /children 
@@ -34,11 +28,7 @@ class Api::V1::ChildrenController < ApplicationController
 
   # PATCH/PUT /children/1
   def update
-    if @child.update(child_params)
-      render json: @child
-    else
-      render json: @child.errors, status: :unprocessable_entity
-    end
+
   end
 
   # DELETE /children/1
